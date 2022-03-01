@@ -29,15 +29,12 @@ namespace ConsoleApp3
     {
         string category = "Автомобильные права";
         public Car(double consumption, double tanksize) : base (consumption, tanksize) { }
-
         public override void Show() => Console.WriteLine($"Категория прав: {category}");
     }
     class Plane : Transport
     {
         string category = "Лицензия на управление самолетом";
         public Plane(double consumption, double tanksize) : base (consumption, tanksize) { }
-
-
         public void Show() => Console.WriteLine($"Категория прав: {category}");
     }
     class Boat : Transport
