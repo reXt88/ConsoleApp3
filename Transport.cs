@@ -6,65 +6,44 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp3
 {
-    class Car
+    abstract class Transport
     {
         double fuelconsumption;
         double tanksize;
-        string category;
-        public Car(double consumption, double tanksize, string category)
+        public Transport(double consumption, double tanksize)
         {
             fuelconsumption = consumption / 100;
             this.tanksize = tanksize;
-            this.category = category;
         }
-        public void MovingCar(int move)
+        public virtual void Moving(int move)
         {
             double remainingfuel = tanksize;
             remainingfuel -= fuelconsumption * move;
-            Console.Write("Остаток бензина: " + remainingfuel);
+            Console.Write("Остаток топлива: " + remainingfuel);
             double powerreserve = (remainingfuel / (fuelconsumption));
             Console.WriteLine($"    Запас хода: {powerreserve:0.00} км");
         }
-        public void Show() => Console.WriteLine($"Категория прав: {category}");
+        public virtual void Show() { }
     }
-    class Plane
+    class Car : Transport
     {
-        double fuelconsumption;
-        double tanksize;
+        string category = "Автомобильные права";
+        public Car(double consumption, double tanksize) : base (consumption, tanksize) { }
+
+        public override void Show() => Console.WriteLine($"Категория прав: {category}");
+    }
+    class Plane : Transport
+    {
         string category = "Лицензия на управление самолетом";
-        public Plane(double consumption, double tanksize, string category)
-        {
-            fuelconsumption = consumption / 100;
-            this.tanksize = tanksize;
-        }
-        public void MovingPlane(int move)
-        {
-            double remainingfuel = tanksize;
-            remainingfuel -= fuelconsumption * move;
-            Console.Write("Остаток бензина: " + remainingfuel);
-            double powerreserve = (remainingfuel / (fuelconsumption));
-            Console.WriteLine($"    Запас хода: {powerreserve:0.00} км");
-        }
+        public Plane(double consumption, double tanksize) : base (consumption, tanksize) { }
+
+
         public void Show() => Console.WriteLine($"Категория прав: {category}");
     }
-    class Boat
+    class Boat : Transport
     {
-        double fuelconsumption;
-        double tanksize;
         string category = "Моторное судно";
-        public Boat(double consumption, double tanksize)
-        {
-            fuelconsumption = consumption / 100;
-            this.tanksize = tanksize;
-        }
-        public void MovingBoat(int move)
-        {
-            double remainingfuel = tanksize;
-            remainingfuel -= fuelconsumption * move;
-            Console.Write("Остаток бензина: " + remainingfuel);
-            double powerreserve = (remainingfuel / (fuelconsumption));
-            Console.WriteLine($"    Запас хода: {powerreserve:0.00} км");
-        }
+        public Boat(double consumption, double tanksize) : base (consumption, tanksize) { }
         public void Show() => Console.WriteLine($"Категория прав: {category}");
     }
 }
